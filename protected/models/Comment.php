@@ -20,6 +20,10 @@ class Comment extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Comment the static model class
 	 */
+
+	const STATUS_PENDING = 1;
+	const STATUS_APPROVED = 2;
+
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
