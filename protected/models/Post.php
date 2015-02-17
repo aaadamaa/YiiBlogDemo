@@ -129,8 +129,9 @@ class Post extends CActiveRecord
 				$this->update_time = time();
 			}
 			return true;
+		}else{
+			return false;
 		}
-		return false;
 	}
 
 	protected function afterFind()
