@@ -146,13 +146,20 @@ class Post extends CActiveRecord
 		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
 	}
 
+	protected function afterDelete()
+	{
+		parent::afterDelete();
+		Comment::model()->deleteAll('post_id='.$this->id);
+		Tag::model()->updateFrequency($this->tags, '');
+	}
+
 
 
 	public function normalizeTags($attribute, $params)
 	{
 		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
 	}
-	
+
 	public function getUrl()
 	{
 		return Yii::app()->createUrl('post/view', array(
