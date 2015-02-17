@@ -152,7 +152,7 @@ class Post extends CActiveRecord
 	{
 		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
 	}
-
+	
 	public function getUrl()
 	{
 		return Yii::app()->createUrl('post/view', array(
