@@ -7,7 +7,13 @@
 </div>
 <div class="span-5 last">
 	<div id="sidebar">
-	<?php if(!Yii::app()->user->isGuest) $this->widget('UserMenu'); ?>
+
+		<?php if(!Yii::app()->user->isGuest) $this->widget('UserMenu'); ?>
+
+		<?php $this->widget('TagCloud', array(
+			'maxTags'=>Yii::app()->params['tagCloudCount'],
+		)); ?>
+
 	</div><!-- sidebar -->
 </div>
 <?php $this->endContent(); ?>
