@@ -15,6 +15,13 @@
  */
 class Post extends CActiveRecord
 {
+
+	const STATUS_DRAFT = 1;
+	const STATUS_PUBLISHED = 2;
+	const STATUS_ARCHIVED = 3;
+
+	private $_oldTags; //Used for updating tag frequency
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -108,6 +115,48 @@ class Post extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+		));
+	}
+
+
+	protected function beforeSave()
+	{
+		if(parent::beforeSave()){
+			if($this->isNewRecord){
+				$this->create_time = $this->update_time = time();
+				$this->author_id = Yii::app()->user->id;
+			}else{
+				$this->update_time = time();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	protected function afterFind()
+	{
+		parent::afterFind();
+		$this->_oldTags = $this->tags;
+	}
+
+	protected function afterSave()
+	{
+		parent::afterSave();
+		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
+	}
+
+
+
+	public function normalizeTags($attribute, $params)
+	{
+		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
+	}
+
+	public function getUrl()
+	{
+		return Yii::app()->createUrl('post/view', array(
+			'id'=>$this->id,
+			'title'=>$this->title,
 		));
 	}
 }
