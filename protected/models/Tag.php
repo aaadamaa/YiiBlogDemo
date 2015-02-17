@@ -89,11 +89,6 @@ class Tag extends CActiveRecord
 	}
 
 
-	public function normalizeTags($attribute, $params)
-	{
-		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
-	}
-
 	public static function string2array($tags)
 	{
 		return preg_split('/\s*,\s*/', trim($tags), -1, PREG_SPLIT_NO_EMPTY);

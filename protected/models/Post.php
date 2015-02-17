@@ -15,6 +15,11 @@
  */
 class Post extends CActiveRecord
 {
+
+	const STATUS_DRAFT = 1;
+	const STATUS_PUBLISHED = 2;
+	const STATUS_ARCHIVED = 3;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -108,6 +113,21 @@ class Post extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+		));
+	}
+
+
+
+	public function normalizeTags($attribute, $params)
+	{
+		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
+	}
+	
+	public function getUrl()
+	{
+		return Yii::app()->createUrl('post/view', array(
+			'id'=>$this->id,
+			'title'=>$this->title,
 		));
 	}
 }
