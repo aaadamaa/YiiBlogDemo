@@ -25,10 +25,6 @@ $this->menu=array(
 		'title',
 		'content',
 		'tags',
-		'status',
-		'create_time',
-		'update_time',
-		'author_id',
 	),
 )); ?>
 

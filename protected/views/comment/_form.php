@@ -22,18 +22,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status'); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_time'); ?>
-		<?php echo $form->textField($model,'create_time'); ?>
-		<?php echo $form->error($model,'create_time'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'author'); ?>
@@ -49,12 +37,6 @@
 		<?php echo $form->labelEx($model,'url'); ?>
 		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'url'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'post_id'); ?>
-		<?php echo $form->textField($model,'post_id'); ?>
-		<?php echo $form->error($model,'post_id'); ?>
 	</div>
 
 	<div class="row buttons">

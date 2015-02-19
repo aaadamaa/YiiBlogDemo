@@ -9,8 +9,8 @@
  * @property string $content
  * @property string $tags
  * @property integer $status
- * @property string $create_time
- * @property string $update_time
+ * @property integer $create_time
+ * @property integer $update_time
  * @property integer $author_id
  */
 class Post extends CActiveRecord
@@ -154,6 +154,13 @@ class Post extends CActiveRecord
 	}
 
 
+	public function getTagLinks()
+	{
+		$links=array();
+		foreach(Tag::string2array($this->tags) as $tag)
+			$links[]=CHtml::link(CHtml::encode($tag), array('post/index', 'tag'=>$tag));
+		return $links;
+	}
 
 	public function normalizeTags($attribute, $params)
 	{

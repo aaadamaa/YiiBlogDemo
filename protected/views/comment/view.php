@@ -23,11 +23,8 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'content',
-		'status',
-		'create_time',
 		'author',
 		'email',
 		'url',
-		'post_id',
 	),
 )); ?>

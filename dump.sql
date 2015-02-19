@@ -41,7 +41,7 @@ CREATE TABLE `blog_comment` (
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `status` (`status`,`create_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,6 @@ CREATE TABLE `blog_comment` (
 
 LOCK TABLES `blog_comment` WRITE;
 /*!40000 ALTER TABLE `blog_comment` DISABLE KEYS */;
-INSERT INTO `blog_comment` VALUES (1,'content',2,1424188654,'adam','test@test.test','',1),(2,'test comment 2',2,1424188675,'test','test@test.test','',1);
 /*!40000 ALTER TABLE `blog_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,14 +94,14 @@ CREATE TABLE `blog_post` (
   `content` text NOT NULL,
   `tags` varchar(255) DEFAULT NULL,
   `status` int(11) NOT NULL,
-  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` timestamp NULL DEFAULT NULL,
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tags` (`tags`),
   KEY `status` (`status`),
   KEY `create_time` (`create_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +110,6 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
-INSERT INTO `blog_post` VALUES (1,'Post 1','Content 1','First, lacking',2,'2015-02-17 14:01:00','0000-00-00 00:00:00',1),(8,'post 2','post 2','post 2',2,'0000-00-00 00:00:00','0000-00-00 00:00:00',1),(10,'test','test','test',2,'0000-00-00 00:00:00','0000-00-00 00:00:00',1),(11,'test','test','test',2,'0000-00-00 00:00:00','0000-00-00 00:00:00',1),(13,'test','test','test',2,'0000-00-00 00:00:00','0000-00-00 00:00:00',1);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +126,7 @@ CREATE TABLE `blog_tag` (
   `frequency` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`frequency`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +135,6 @@ CREATE TABLE `blog_tag` (
 
 LOCK TABLES `blog_tag` WRITE;
 /*!40000 ALTER TABLE `blog_tag` DISABLE KEYS */;
-INSERT INTO `blog_tag` VALUES (1,'First',1),(2,'lacking',1),(3,'test1',1),(4,'test2',1),(5,'test',7),(6,'post 2',1),(7,'post 3',1);
 /*!40000 ALTER TABLE `blog_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +177,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-17 12:11:02
+-- Dump completed on 2015-02-19  7:21:45
