@@ -99,11 +99,32 @@ class User extends CActiveRecord
 
 	public function validatePassword($password)
 	{
-		return CPasswordHelper::verifyPassword($password, $this->password);
+		$testPassword = crypt($password, $this->password);
+		return $testPassword === $this->password;
 	}
 
 	public function hashPassword($password)
 	{
-		return CPasswordHelper::hashPassword($password);
+		return crypt($password, $this->generateSalt());
+	}
+
+	public function generateSalt($cost = 10)
+	{
+		if(!is_numeric($cost)||$cost<4||$cost>31){
+			throw new CException(Yii::t('Cost parameter must be between 4 and 31.'));
+		}
+		// Get some pseudo-random data from mt_rand().
+		$rand='';
+		for($i=0;$i<8;++$i)
+			$rand.=pack('S',mt_rand(0,0xffff));
+		// Add the microtime for a little more entropy.
+		$rand.=microtime();
+		// Mix the bits cryptographically.
+		$rand=sha1($rand,true);
+		// Form the prefix that specifies hash algorithm type and cost parameter.
+		$salt='$2a$'.str_pad((int)$cost,2,'0',STR_PAD_RIGHT).'$';
+		// Append the random salt string in the required base64 format.
+		$salt.=strtr(substr(base64_encode($rand),0,22),array('+'=>'.'));
+		return $salt;
 	}
 }

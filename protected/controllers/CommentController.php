@@ -120,8 +120,7 @@ class CommentController extends Controller
 		$dataProvider=new CActiveDataProvider('Comment', array(
 			'criteria'=>array(
 				'with'=>'post',
-				'condition'=>'t.status='.Comment::STATUS_PENDING,
-				'order'=>'t.create_time DESC',
+				'order'=>'t.status ASC, t.create_time DESC',
 			),
 		));
 		$this->render('index',array(
