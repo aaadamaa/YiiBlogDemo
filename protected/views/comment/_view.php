@@ -5,20 +5,29 @@
 
 <div class="view">
 
+	<?php if($data->status == Comment::STATUS_PENDING) : ?>
+		<span style="color:red;">Pending approval</span>
+		<br />
+		<?php echo CHtml::linkButton('Approve', array('submit'=>array(
+			'comment/approve', 'id'=>$data->id
+		))); ?>
+		<br />
+	<?php endif; ?>
+
+	<?php echo CHtml::linkButton('Delete', array('submit'=>array(
+		'comment/delete', 'id'=>$data->id
+	))); ?>
+
+	<br />
+	<br />
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::link('#'.$data->id, $data->url, array(
+		'title'=>'Permalink to this comment',
+	)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('content')); ?>:</b>
 	<?php echo CHtml::encode($data->content); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('status')); ?>:</b>
-	<?php echo CHtml::encode($data->status); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('create_time')); ?>:</b>
-	<?php echo CHtml::encode($data->create_time); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('author')); ?>:</b>

@@ -101,11 +101,15 @@ class CommentController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(Yii::app()->request->isPostRequest){
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			if(!isset($_POST['ajax'])){
+				$this->redirect(array('index'));
+			}
+		}else{
+			throw new CHttpException(400, 'Invalid request, please do not do that again.');
+		}
 	}
 
 	/**
@@ -113,7 +117,13 @@ class CommentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Comment');
+		$dataProvider=new CActiveDataProvider('Comment', array(
+			'criteria'=>array(
+				'with'=>'post',
+				'condition'=>'t.status='.Comment::STATUS_PENDING,
+				'order'=>'t.create_time DESC',
+			),
+		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -132,6 +142,18 @@ class CommentController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
+	}
+
+	public function actionApprove($id)
+	{
+		if(Yii::app()->request->isPostRequest){
+			$comment = $this->loadModel($id);
+			$comment->approve();
+			if(!isset($_POST['ajax'])){
+				$this->redirect(array('index'));
+			}
+			$this->redirect(array('index'));
+		}
 	}
 
 	/**
