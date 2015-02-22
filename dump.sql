@@ -41,7 +41,7 @@ CREATE TABLE `blog_comment` (
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `status` (`status`,`create_time`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,6 +50,7 @@ CREATE TABLE `blog_comment` (
 
 LOCK TABLES `blog_comment` WRITE;
 /*!40000 ALTER TABLE `blog_comment` DISABLE KEYS */;
+INSERT INTO `blog_comment` VALUES (1,'Squirrel\'s are the best',2,1424620021,'John Smith','test@test.test','',2),(2,'Squirrel\'s are the worst',1,1424620071,'Sergeant Pepper','Pepper@mailinator.com','',2);
 /*!40000 ALTER TABLE `blog_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +102,7 @@ CREATE TABLE `blog_post` (
   KEY `tags` (`tags`),
   KEY `status` (`status`),
   KEY `create_time` (`create_time`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,6 +111,7 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
+INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',2,1424619633,1424619633,1);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +128,7 @@ CREATE TABLE `blog_tag` (
   `frequency` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`frequency`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +137,7 @@ CREATE TABLE `blog_tag` (
 
 LOCK TABLES `blog_tag` WRITE;
 /*!40000 ALTER TABLE `blog_tag` DISABLE KEYS */;
+INSERT INTO `blog_tag` VALUES (1,'First',1),(2,'Yii',1),(3,'Awesome',3),(4,'Demo',5),(5,'Squirrel',1),(6,'Coffee',2),(7,'Latin',1),(8,'Filler',1),(9,'Sad',1);
 /*!40000 ALTER TABLE `blog_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-19  7:21:45
+-- Dump completed on 2015-02-22 11:48:44
