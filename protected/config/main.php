@@ -58,7 +58,10 @@ return array(
 		),
 	*/
 		// uncomment the following to use a MySQL database
-		
+		'cache'=>array(
+			'class'=>'CDbCache',
+		),
+
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=YiiBlogDemo',
 			'emulatePrepare' => true,
@@ -66,6 +69,7 @@ return array(
 			'password' => '',
 			'charset' => 'utf8',
 			'tablePrefix' => 'blog_',
+			'schemaCachingDuration'=>3600,
 		),
 		
 		'errorHandler'=>array(
