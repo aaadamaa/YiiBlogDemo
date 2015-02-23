@@ -8,6 +8,7 @@
  * @property string $title
  * @property string $content
  * @property string $tags
+ * @property integer $category
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
@@ -48,7 +49,7 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content, status', 'required'),
+			array('title, content, status, category', 'required'),
 			array('status', 'in', 'range'=>array(1, 2, 3)),
 			array('title', 'length', 'max'=>255),
 			array('tags', 'match', 'pattern'=>'/^[\w\s,]+$/', 'message'=>'Tags can only contain word characters.'),
@@ -86,6 +87,7 @@ class Post extends CActiveRecord
 			'title' => 'Title',
 			'content' => 'Content',
 			'tags' => 'Tags',
+			'category' => 'Category',
 			'status' => 'Status',
 			'create_time' => 'Create Time',
 			'update_time' => 'Update Time',
@@ -108,6 +110,7 @@ class Post extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('tags',$this->tags,true);
+		$criteria->compare('category',$this->category);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);

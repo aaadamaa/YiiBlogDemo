@@ -24,6 +24,32 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `YiiBlogDemo` /*!40100 DEFAULT CHARACTE
 USE `YiiBlogDemo`;
 
 --
+-- Table structure for table `blog_category`
+--
+
+DROP TABLE IF EXISTS `blog_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `level` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `blog_category`
+--
+
+LOCK TABLES `blog_category` WRITE;
+/*!40000 ALTER TABLE `blog_category` DISABLE KEYS */;
+INSERT INTO `blog_category` VALUES (1,'Uncategorized',NULL,0),(2,'Programming',NULL,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',NULL,0),(9,'Motorcycles',8,1),(10,'Cars',8,1);
+/*!40000 ALTER TABLE `blog_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `blog_comment`
 --
 
@@ -41,7 +67,7 @@ CREATE TABLE `blog_comment` (
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `status` (`status`,`create_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +120,7 @@ CREATE TABLE `blog_post` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `tags` varchar(255) DEFAULT NULL,
+  `category` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
@@ -101,8 +128,9 @@ CREATE TABLE `blog_post` (
   PRIMARY KEY (`id`),
   KEY `tags` (`tags`),
   KEY `status` (`status`),
-  KEY `create_time` (`create_time`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  KEY `create_time` (`create_time`),
+  KEY `category` (`category`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +139,7 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
-INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',2,1424619633,1424619633,1);
+INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',0,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',0,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',0,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',0,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',0,2,1424619633,1424619633,1),(6,'test','testtt','',0,1,1424728993,1424729012,1);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-22 11:48:44
+-- Dump completed on 2015-02-23 18:22:48
