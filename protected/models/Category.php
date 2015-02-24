@@ -91,13 +91,13 @@ class Category extends CActiveRecord
 		));
 	}
 
-	public static function getCategories($parent = 0)
+	public static function getMainCategories()
 	{
 		$categories = array();
 
 		$models = self::model()->findAll(array(
 			'condition'=>'parent=:parent',
-			'params'=>array(':parent'=>$parent),
+			'params'=>array(':parent'=>0),
 			
 //Want uncategorized to be first, then sort by name...
 //			'order'=>'when id = 0 than 1 else 2 end, name ASC',
@@ -108,5 +108,24 @@ class Category extends CActiveRecord
 		}
 
 		return $categories;
+	}
+
+	public function getChildren()
+	{
+		$children = self::model()->findAll(array(
+			'condition'=>'parent=:parent',
+			'params'=>array(':parent'=>$this->id),
+		));
+
+		return $children;
+	}
+
+	public static function getMaxLevel()
+	{
+		$lowest = self::model()->find(array(
+			'order'=>'level DESC',
+		));
+
+		return $lowest->level;
 	}
 }

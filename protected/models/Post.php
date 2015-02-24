@@ -124,6 +124,7 @@ class Post extends CActiveRecord
 
 	protected function beforeSave()
 	{
+		die(var_dump($_POST[]));
 		if(parent::beforeSave()){
 			if($this->isNewRecord){
 				$this->create_time = $this->update_time = time();
