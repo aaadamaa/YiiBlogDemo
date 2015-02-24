@@ -34,6 +34,15 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model, 'category'); ?>
+		<?php echo $form->dropDownList($model, 'category', Category::getMainCategories(), array(
+			'type'=>'POST',
+
+		)); ?>
+		<?php echo $form->error($model, 'category'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
 		<?php echo $form->dropDownList($model, 'status', Lookup::items('PostStatus')); ?>
 		<?php echo $form->error($model,'status'); ?>

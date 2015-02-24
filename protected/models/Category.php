@@ -90,4 +90,23 @@ class Category extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public static function getCategories($parent = 0)
+	{
+		$categories = array();
+
+		$models = self::model()->findAll(array(
+			'condition'=>'parent=:parent',
+			'params'=>array(':parent'=>$parent),
+			
+//Want uncategorized to be first, then sort by name...
+//			'order'=>'when id = 0 than 1 else 2 end, name ASC',
+		));
+
+		foreach($models as $model){
+			$categories[$model->id] = $model->name;
+		}
+
+		return $categories;
+	}
 }
