@@ -36,7 +36,7 @@ CREATE TABLE `blog_category` (
   `parent` int(11) DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `blog_category` (
 
 LOCK TABLES `blog_category` WRITE;
 /*!40000 ALTER TABLE `blog_category` DISABLE KEYS */;
-INSERT INTO `blog_category` VALUES (1,'Uncategorized',NULL,0),(2,'Programming',NULL,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',NULL,0),(9,'Motorcycles',8,1),(10,'Cars',8,1);
+INSERT INTO `blog_category` VALUES (1,'Uncategorized',0,0),(2,'Programming',0,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',0,0),(9,'Motorcycles',8,1),(10,'Cars',8,1),(11,'Inner Join',6,3);
 /*!40000 ALTER TABLE `blog_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
-INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',0,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',0,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',0,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',0,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',0,2,1424619633,1424619633,1),(6,'test','testtt','',0,1,1424728993,1424729012,1);
+INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',0,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',0,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',0,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',0,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',0,2,1424619633,1424619633,1);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-23 18:22:48
+-- Dump completed on 2015-02-24 19:27:44
