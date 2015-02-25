@@ -124,7 +124,6 @@ class Post extends CActiveRecord
 
 	protected function beforeSave()
 	{
-		die(var_dump($_POST[]));
 		if(parent::beforeSave()){
 			if($this->isNewRecord){
 				$this->create_time = $this->update_time = time();
@@ -132,6 +131,25 @@ class Post extends CActiveRecord
 			}else{
 				$this->update_time = time();
 			}
+
+			//Loop up though categories, starting at the "sub-est (deepest)" until a valid value is found.
+			//In some cases, a subcategory may not be populated, or may have not been set, so check the one above it.
+			$foundValidCategory = false;
+			$category = 1;
+			for($i = Category::getMaxLevel(); $i >= 0 && !$foundValidCategory; $i--){
+				if(isset($_POST["category_$i"]) && is_numeric($_POST["category_$i"])){
+					$category = $_POST["category_$i"];
+					$foundValidCategory = true;
+				}
+			}
+
+			if(!$foundValidCategory){
+				if(isset($_POST['Post']['category']) && is_numeric($_POST['Post']['category'])){
+					$category = $_POST['Post']['category'];
+				}
+			}
+			$this->category = $category;
+
 			return true;
 		}else{
 			return false;

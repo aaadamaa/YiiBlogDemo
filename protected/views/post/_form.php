@@ -79,7 +79,7 @@ $categorySelectJS = "function(data){
 
 	<?php for($i=0; $i<$maxLevel; $i++): ?>
 	<div class="row" id="subcategoryDiv_<?= $i ?>" style='display:none;'>
-		<?php echo $form->dropDownList($model, 'category', array(), array(
+		<?php echo CHtml::dropDownList("category_$i", "", array(), array(
 			'id'=>"subcategory_$i",
 			'ajax'=>array(
 				'type'=>'POST',
