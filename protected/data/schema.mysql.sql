@@ -130,7 +130,7 @@ CREATE TABLE `blog_post` (
   KEY `status` (`status`),
   KEY `create_time` (`create_time`),
   KEY `category` (`category`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
-INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',0,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',0,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',0,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',0,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',0,2,1424619633,1424619633,1);
+INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',1,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',1,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',1,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',1,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',1,2,1424619633,1424619633,1);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `blog_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `password` (`password`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `blog_user` (
 
 LOCK TABLES `blog_user` WRITE;
 /*!40000 ALTER TABLE `blog_user` DISABLE KEYS */;
-INSERT INTO `blog_user` VALUES (1,'demo','$2a$10$JTJf6/XqC94rrOtzuF397OHa4mbmZrVTBOQCmYD9U.obZRUut4BoC',NULL,'aaadamaa@gmail.com',NULL);
+INSERT INTO `blog_user` VALUES (1,'demo','$2a$10$JTJf6/XqC94rrOtzuF397OHa4mbmZrVTBOQCmYD9U.obZRUut4BoC',NULL,'aaadamaa@gmail.com',NULL),(2,'admin','$2a$10$JTJf6/XqC94rrOtzuF397OHa4mbmZrVTBOQCmYD9U.obZRUut4BoC',NULL,'aaadamaa@gmail.com','NULL');
 /*!40000 ALTER TABLE `blog_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-24 19:27:44
+-- Dump completed on 2015-02-24 23:11:51
