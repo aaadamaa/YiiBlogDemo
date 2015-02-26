@@ -36,7 +36,7 @@ CREATE TABLE `blog_category` (
   `parent` int(11) DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `blog_category` (
 
 LOCK TABLES `blog_category` WRITE;
 /*!40000 ALTER TABLE `blog_category` DISABLE KEYS */;
-INSERT INTO `blog_category` VALUES (1,'Uncategorized',0,0),(2,'Programming',0,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',0,0),(9,'Motorcycles',8,1),(10,'Cars',8,1),(11,'Inner Join',6,3);
+INSERT INTO `blog_category` VALUES (1,'Uncategorized',0,0),(2,'Programming',0,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',0,0),(9,'Motorcycles',8,1),(10,'Cars',8,1),(11,'Inner Join',6,3),(12,'dumps',4,2),(13,'schema dumps',12,3),(14,'full database dumps',12,3),(15,'Summer Activities',0,0),(16,'Paddle boarding',15,1);
 /*!40000 ALTER TABLE `blog_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +130,7 @@ CREATE TABLE `blog_post` (
   KEY `status` (`status`),
   KEY `create_time` (`create_time`),
   KEY `category` (`category`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-24 23:11:51
+-- Dump completed on 2015-02-26 14:01:39

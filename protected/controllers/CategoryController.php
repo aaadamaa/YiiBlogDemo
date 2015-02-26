@@ -63,9 +63,37 @@ class CategoryController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Category']))
+		if(isset($_POST['newCategory']))
 		{
-			$model->attributes=$_POST['Category'];
+			if(isset($_POST['subcategory']) && is_array($_POST['subcategory'])){
+				$category = Category::getParentFromSubcategoryDropdown($_POST['subcategory']);
+			}else{
+				$category = false;
+			}
+
+			if($category === false){
+				if(isset($_POST['category']) && is_numeric($_POST['category'])){
+					$category = $_POST['category'];
+				}else{
+					$category = 1;
+				}
+			}
+
+			if($category == 1){
+				$level = 0;
+				$parent = 0;
+			}else{
+				$parentModel = Category::model()->findByPk($category);
+				$level = $parentModel->level + 1;
+				$parent = $category;
+			}
+
+		//	$model->name = $_POST['newCategory'];
+		//	$model->parent = $parent;
+		//	$model->level = $level;
+
+//			die(var_dump($model->getAttributes()));
+
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

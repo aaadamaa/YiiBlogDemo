@@ -38,11 +38,11 @@ class Category extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name', 'required'),
-			array('parent', 'numerical', 'integerOnly'=>true),
+//			array('parent', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('name, parent', 'safe', 'on'=>'search'),
+//			array('name, parent', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -185,5 +185,20 @@ class Category extends CActiveRecord
 
 
 		}";
+	}
+
+	public static function getParentFromSubcategoryDropdown($subcategories = array())
+	{
+		//Loop up though categories, starting at the "sub-est (deepest)" until a valid value is found.
+		//In some cases, a subcategory may not be populated, or may have not been set, so check the one above it.
+		$category = 1;
+		for($i = count($subcategories) - 1; $i >= 0; $i--){
+			if(isset($subcategories[$i]) && is_numeric($subcategories[$i])){
+				$category = $subcategories[$i];
+				return $category;
+			}
+		}
+		//No valid subcategories set
+		return false;
 	}
 }

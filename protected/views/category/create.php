@@ -7,12 +7,38 @@ $this->breadcrumbs=array(
 	'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List Category', 'url'=>array('index')),
-	array('label'=>'Manage Category', 'url'=>array('admin')),
-);
+$maxLevel = Category::getMaxLevel();
+
 ?>
+
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'category-form-create',
+	'enableAjaxValidation'=>false,
+)); ?>
 
 <h1>Create Category</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+Parent Category:<br >
+<?php echo Category::mainCategoryDropdown(); ?>
+<br />
+<?php for($i=0; $i<$maxLevel; $i++): ?>
+	<div id="subcategoryDiv_<?= $i ?>" style='display:none;'>
+		<?php echo Category::subcategoryDropdown("subcategory[$i]", "subcategory_$i"); ?>
+	</div>
+<?php endfor; ?>
+New Category:<br />
+<?php echo CHtml::textField('newCategory'); ?>
+<?php echo $form->error($model,'name'); ?>
+
+
+
+<div class="row buttons">
+	<?php echo CHtml::submitButton('Create'); ?>
+</div>
+
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->
