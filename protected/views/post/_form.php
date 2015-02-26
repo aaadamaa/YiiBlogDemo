@@ -72,7 +72,7 @@ $categorySelectJS = "function(data){
 
 	<?php for($i=0; $i<$maxLevel; $i++): ?>
 	<div class="row" id="subcategoryDiv_<?= $i ?>" style='display:none;'>
-		<?php echo Category::subcategoryDropdown("category_$i", "subcategory_$i"); ?>
+		<?php echo Category::subcategoryDropdown("subcategory[$i]", "subcategory_$i"); ?>
 		<?php echo $form->error($model, 'category'); ?>
 	</div>
 	<?php endfor; ?>

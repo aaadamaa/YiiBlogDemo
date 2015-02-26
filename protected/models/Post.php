@@ -132,18 +132,13 @@ class Post extends CActiveRecord
 				$this->update_time = time();
 			}
 
-			//Loop up though categories, starting at the "sub-est (deepest)" until a valid value is found.
-			//In some cases, a subcategory may not be populated, or may have not been set, so check the one above it.
-			$foundValidCategory = false;
-			$category = 1;
-			for($i = Category::getMaxLevel(); $i >= 0 && !$foundValidCategory; $i--){
-				if(isset($_POST["category_$i"]) && is_numeric($_POST["category_$i"])){
-					$category = $_POST["category_$i"];
-					$foundValidCategory = true;
-				}
+			if(isset($_POST['subcategory']) && is_array($_POST['subcategory'])){
+				$category = Category::getParentFromSubcategoryDropdown($_POST['subcategory']);
+			}else{
+				$category = false;
 			}
 
-			if(!$foundValidCategory){
+			if($category === false){
 				if(isset($_POST['category']) && is_numeric($_POST['category'])){
 					$category = $_POST['category'];
 				}
