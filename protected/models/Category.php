@@ -91,6 +91,24 @@ class Category extends CActiveRecord
 		));
 	}
 
+	protected function beforeDelete()
+	{
+		if(parent::beforeDelete()){
+
+			//Also delete subcategories of this category
+			$children = $this->getChildren();
+			foreach($children as $child){
+				$child->delete();
+			}
+			//Also uncatagorize posts that were in this category.
+			Post::model()->updateAll(array('category'=>1), 'category='.$this->id);
+
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	public static function getMainCategories()
 	{
 		$categories = array();

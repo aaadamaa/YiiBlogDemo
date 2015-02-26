@@ -132,7 +132,7 @@ class CategoryController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(false && Yii::app()->request->isPostRequest){
+		if(Yii::app()->request->isPostRequest){
 			$this->loadModel($id)->delete();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser

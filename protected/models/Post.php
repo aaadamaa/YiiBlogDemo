@@ -144,8 +144,8 @@ class Post extends CActiveRecord
 			}
 
 			if(!$foundValidCategory){
-				if(isset($_POST['Post']['category']) && is_numeric($_POST['Post']['category'])){
-					$category = $_POST['Post']['category'];
+				if(isset($_POST['category']) && is_numeric($_POST['category'])){
+					$category = $_POST['category'];
 				}
 			}
 			$this->category = $category;
