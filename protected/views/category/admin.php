@@ -52,6 +52,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		array(
 			'class'=>'CButtonColumn',
 			'deleteConfirmation'=>"Are you sure you want to delete this item?\nAll subcategories will also be deleted.\nAny posts in these categories will become uncategorized.",
+			'buttons'=>array(
+				'delete'=>array(
+					'visible'=>function($row, $data) {
+						return $data->id > 1;
+					},
+				),
+			),
 		),
 	),
 )); ?>

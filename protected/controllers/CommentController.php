@@ -101,7 +101,7 @@ class CommentController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest){
+		if(Yii::app()->request->isPostRequest && $id > 1){
 			$this->loadModel($id)->delete();
 
 			if(!isset($_POST['ajax'])){
