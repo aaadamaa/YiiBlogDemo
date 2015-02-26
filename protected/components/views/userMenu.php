@@ -3,5 +3,8 @@
 	<li><?php echo CHtml::link('Manage Posts', array('post/admin')); ?></li>
 	<li><?php echo CHtml::link('Approve Comments', array('comment/index'))
 		.' (' . Comment::model()->pendingCommentCount . ')'; ?></li>
+	<?php if(Yii::app()->user->name == "admin"): ?>
+	<li><?php echo CHtml::link('Manage Categories', array('category/index')); ?></li>
+	<?php endif; ?>
 	<li><?php echo CHtml::link('Logout', array('site/logout')); ?></li>
 </ul>
