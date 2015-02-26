@@ -128,4 +128,62 @@ class Category extends CActiveRecord
 
 		return $lowest->level;
 	}
+
+	public static function mainCategoryDropdown($name = 'category', $id="")
+	{
+		$html = CHtml::dropDownList($name, $id, Category::getMainCategories(), array(
+			'ajax'=>array(
+				'type'=>'POST',
+				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
+				'data'=>array('parent'=>'js:this.value'),
+				'success'=>self::getDropdownJs(),
+		)));
+
+		return $html;
+	}
+
+	public static function subcategoryDropdown($name, $id)
+	{
+		$html = CHtml::dropDownList($name, "", array(), array(
+			'id'=>$id,
+			'ajax'=>array(
+				'type'=>'POST',
+				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
+				'success'=>self::getDropdownJs(),
+				'data'=>array('parent'=>'js:this.value'),
+		)));
+
+		return $html;
+	}
+
+	public static function getDropdownJs()
+	{
+		return "function(data){
+			data = JSON.parse(data);
+
+			var maxLevel = '". self::getMaxLevel() ."';
+			var level = parseInt(data.level);
+
+			if(level + 1 > maxLevel){
+				return;
+			}
+
+			var elementId = '#subcategory_' + level;
+			var divId = '#subcategoryDiv_' + level;
+
+			if(data.html != ''){
+				$(elementId).html(data.html);
+				$(divId).show();
+			}
+
+			for(var i = level + 1; i < maxLevel; i++){
+				elementId = '#subcategory_' + i;
+				divId = '#subcategoryDiv_' + i;
+				$(divId).hide();
+				$(elementId).html('');
+			}
+
+
+		}";
+	}
 }

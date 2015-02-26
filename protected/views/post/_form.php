@@ -66,27 +66,13 @@ $categorySelectJS = "function(data){
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'category'); ?>
-		<?php echo $form->dropDownList($model, 'category', Category::getMainCategories(), array(
-			'ajax'=>array(
-				'type'=>'POST',
-				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
-				'success'=>$categorySelectJS,
-				'data'=>array('parent'=>'js:this.value'),
-			),
-		)); ?>
+		<?php echo Category::mainCategoryDropdown(); ?>
 		<?php echo $form->error($model, 'category'); ?>
 	</div>
 
 	<?php for($i=0; $i<$maxLevel; $i++): ?>
 	<div class="row" id="subcategoryDiv_<?= $i ?>" style='display:none;'>
-		<?php echo CHtml::dropDownList("category_$i", "", array(), array(
-			'id'=>"subcategory_$i",
-			'ajax'=>array(
-				'type'=>'POST',
-				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
-				'success'=>$categorySelectJS,
-				'data'=>array('parent'=>'js:this.value'),
-		))); ?>
+		<?php echo Category::subcategoryDropdown("category_$i", "subcategory_$i"); ?>
 		<?php echo $form->error($model, 'category'); ?>
 	</div>
 	<?php endfor; ?>
