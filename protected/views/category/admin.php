@@ -51,6 +51,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'level',
 		array(
 			'class'=>'CButtonColumn',
+			'deleteConfirmation'=>"Are you sure you want to delete this item?\nAll subcategories will also be deleted.\nAny posts in these categories will become uncategorized.",
 		),
 	),
 )); ?>

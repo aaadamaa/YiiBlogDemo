@@ -28,8 +28,8 @@ Parent Category:<br >
 		<?php echo Category::subcategoryDropdown("subcategory[$i]", "subcategory_$i"); ?>
 	</div>
 <?php endfor; ?>
-New Category:<br />
-<?php echo CHtml::textField('newCategory'); ?>
+<?php echo $form->labelEx($model,'name'); ?>
+<?php echo CHtml::activeTextField($model, 'name'); ?>
 <?php echo $form->error($model,'name'); ?>
 
 

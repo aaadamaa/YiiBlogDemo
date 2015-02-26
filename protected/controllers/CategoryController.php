@@ -63,7 +63,7 @@ class CategoryController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['newCategory']))
+		if(isset($_POST['Category']))
 		{
 			if(isset($_POST['subcategory']) && is_array($_POST['subcategory'])){
 				$category = Category::getParentFromSubcategoryDropdown($_POST['subcategory']);
@@ -88,11 +88,9 @@ class CategoryController extends Controller
 				$parent = $category;
 			}
 
-		//	$model->name = $_POST['newCategory'];
-		//	$model->parent = $parent;
-		//	$model->level = $level;
-
-//			die(var_dump($model->getAttributes()));
+			$model->attributes=$_POST['Category'];
+			$model->parent = $parent;
+			$model->level = $level;
 
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -119,7 +117,7 @@ class CategoryController extends Controller
 		{
 			$model->attributes=$_POST['Category'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('category/admin'));
 		}
 
 		$this->render('update',array(
@@ -134,11 +132,15 @@ class CategoryController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(false && Yii::app()->request->isPostRequest){
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}else{
+			throw new CHttpException(400, 'Invalid request.  Please do not repeat this request again.');
+		}
 	}
 
 	/**

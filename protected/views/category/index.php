@@ -9,6 +9,5 @@ $this->breadcrumbs=array(
 
 <h1>Categories</h1>
 
-<?php echo CHtml::link('Create Category',array('category/create')); ?><br />
-<?php echo CHtml::link('Update Category',array('category/update')); ?><br />
-<?php echo CHtml::link('Delete Category',array('category/delete')); ?><br />
+<?php echo CHtml::link('Create new category',array('category/create')); ?><br />
+<?php echo CHtml::link('Update or Delete category',array('category/admin')); ?><br />
