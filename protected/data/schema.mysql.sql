@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.21, for osx10.6 (x86_64)
 --
 -- Host: localhost    Database: YiiBlogDemo
 -- ------------------------------------------------------
--- Server version	5.6.17
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `blog_category` (
   `parent` int(11) DEFAULT NULL,
   `level` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `blog_category` (
 
 LOCK TABLES `blog_category` WRITE;
 /*!40000 ALTER TABLE `blog_category` DISABLE KEYS */;
-INSERT INTO `blog_category` VALUES (1,'Uncategorized',0,0),(2,'Programming',0,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(8,'vehicles',0,0),(9,'Motorcycles',8,1),(10,'Cars',8,1),(11,'Inner Join',6,3),(12,'dumps',4,2),(13,'schema dumps',12,3),(14,'full database dumps',12,3);
+INSERT INTO `blog_category` VALUES (1,'Uncategorized',0,0),(2,'Programming',0,0),(3,'PHP',2,1),(4,'MySQL',2,1),(5,'Yii',2,1),(6,'Joins',4,2),(7,'Optimization',4,2),(11,'Inner Join',6,3),(12,'dumps',4,2),(13,'schema dumps',12,3),(14,'full database dumps',12,3);
 /*!40000 ALTER TABLE `blog_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `blog_lookup` (
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`type`,`position`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `blog_lookup` (
 
 LOCK TABLES `blog_lookup` WRITE;
 /*!40000 ALTER TABLE `blog_lookup` DISABLE KEYS */;
-INSERT INTO `blog_lookup` VALUES (1,'Draft',1,'PostStatus',1),(2,'Published',2,'PostStatus',2),(3,'Archived',3,'PostStatus',3),(4,'Pending Approval',1,'CommentStatus',1),(5,'Approved',2,'CommentStatus',2);
+INSERT INTO `blog_lookup` VALUES (1,'Draft',1,'PostStatus',1),(2,'Published',2,'PostStatus',2),(3,'Archived',3,'PostStatus',3),(4,'Pending Approval',1,'CommentStatus',1),(5,'Approved',2,'CommentStatus',2),(6,'No Category',1,'Category',1);
 /*!40000 ALTER TABLE `blog_lookup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +130,7 @@ CREATE TABLE `blog_post` (
   KEY `status` (`status`),
   KEY `create_time` (`create_time`),
   KEY `category` (`category`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `blog_post` (
 
 LOCK TABLES `blog_post` WRITE;
 /*!40000 ALTER TABLE `blog_post` DISABLE KEYS */;
-INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',1,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',1,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',1,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',1,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',1,2,1424619633,1424619633,1),(18,'mysql','test','',4,1,1424982173,1424982173,2),(21,'temp 2','test','',1,1,1424982880,1424982880,2),(16,'temp 1','test','',1,1,1424982141,1424982141,2);
+INSERT INTO `blog_post` VALUES (1,'Welcome','This is a Yii Demo Blog','First, Yii, Awesome, Demo',1,2,1424619421,1424619421,1),(2,'Squirrel','There\'s a Squirrel outside','Squirrel, Demo, Awesome',1,2,1424619490,1424619490,1),(3,'Coffee','Good stuff','Awesome, Coffee, demo',1,2,1424619522,1424619522,1),(4,'Lorem Ipsum','And some other filler','Demo, Latin, Filler',1,2,1424619570,1424619570,1),(5,'Roll up the rim','Lost again','Coffee, demo, Sad',1,2,1424619633,1424619633,1),(18,'MySQL','Select the things!','Awesome, MySQL',4,2,1424982173,1425234520,2),(22,'Dumping Data','When dumping mysql data, you can use the mysqldump command.','MySQL',12,2,1425235192,1425235192,2),(23,'Dump everything','Today we\'ll talk about dumping entire databases, including content.  You can accomplish this task with the command mysqldump','',14,2,1425235302,1425235302,2),(24,'Schema dumps','If you want to dump a table structure, you can accomplish it with this command:\r\nmysqldump -d\r\nthe -d flag tells mysqldump not to dump the data.','MySQL',13,2,1425235410,1425235410,2);
 /*!40000 ALTER TABLE `blog_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `blog_tag` (
   `frequency` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`frequency`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `blog_tag` (
 
 LOCK TABLES `blog_tag` WRITE;
 /*!40000 ALTER TABLE `blog_tag` DISABLE KEYS */;
-INSERT INTO `blog_tag` VALUES (1,'First',1),(2,'Yii',1),(3,'Awesome',3),(4,'Demo',5),(5,'Squirrel',1),(6,'Coffee',2),(7,'Latin',1),(8,'Filler',1),(9,'Sad',1);
+INSERT INTO `blog_tag` VALUES (1,'First',1),(2,'Yii',1),(3,'Awesome',4),(4,'Demo',5),(5,'Squirrel',1),(6,'Coffee',2),(7,'Latin',1),(8,'Filler',1),(9,'Sad',1),(10,'MySQL',3);
 /*!40000 ALTER TABLE `blog_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-26 16:57:06
+-- Dump completed on 2015-03-01 18:20:36

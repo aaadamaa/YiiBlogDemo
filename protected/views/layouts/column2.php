@@ -17,6 +17,8 @@
 		<?php $this->widget('RecentComments', array(
 			'maxComments' => Yii::app()->params['recentCommentCount'],
 		)); ?>
+		
+		<?php $this->widget('CategorySearch'); ?>
 
 	</div><!-- sidebar -->
 </div>

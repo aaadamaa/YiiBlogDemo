@@ -135,6 +135,9 @@ class PostController extends Controller
 		if(isset($_GET['tag'])){
 			$criteria->addSearchCondition('tags', $_GET['tag']);
 		}
+		if(isset($_GET['category'])){
+			$criteria->addInCondition('category', Category::getAllChildIds($_GET['category']));
+		}
 
 		$dataProvider = new CActiveDataProvider('Post', array(
 			'pagination'=>array(

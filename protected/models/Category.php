@@ -11,6 +11,9 @@
  */
 class Category extends CActiveRecord
 {
+	
+	const NO_CATEGORY = 1; 
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -101,7 +104,7 @@ class Category extends CActiveRecord
 				$child->delete();
 			}
 			//Also uncatagorize posts that were in this category.
-			Post::model()->updateAll(array('category'=>1), 'category='.$this->id);
+			Post::model()->updateAll(array('category'=>Category::NO_CATEGORY), 'category='.$this->id);
 
 			return true;
 		}else{
@@ -137,6 +140,21 @@ class Category extends CActiveRecord
 
 		return $children;
 	}
+	
+	public function getAllChildIds($id)
+	{
+		$ids = array($id);
+		$model = self::model()->findByPk($id);
+		if($model === NULL){
+			return array();
+		}
+		$children = $model->getChildren();
+		foreach($children as $child){
+			$ids = array_merge($ids, self::getAllChildIds($child->id));
+		}
+		
+		return $ids;
+	}
 
 	public static function getMaxLevel()
 	{
@@ -147,9 +165,10 @@ class Category extends CActiveRecord
 		return $lowest->level;
 	}
 
-	public static function mainCategoryDropdown($name = 'category', $id="")
+	public static function mainCategoryDropdown($name = 'category', $id='category', $selected="")
 	{
-		$html = CHtml::dropDownList($name, $id, Category::getMainCategories(), array(
+		$html = CHtml::dropDownList($name, $selected, Category::getMainCategories(), array(
+			'id'=>$id,
 			'ajax'=>array(
 				'type'=>'POST',
 				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
@@ -160,10 +179,11 @@ class Category extends CActiveRecord
 		return $html;
 	}
 
-	public static function subcategoryDropdown($name, $id)
+	public static function subcategoryDropdown($name, $id, $html="", $selected="")
 	{
 		$html = CHtml::dropDownList($name, "", array(), array(
 			'id'=>$id,
+			'style'=>'display:none;',
 			'ajax'=>array(
 				'type'=>'POST',
 				'url'=>Yii::app()->createUrl('category/loadSubcategories'),
@@ -187,17 +207,15 @@ class Category extends CActiveRecord
 			}
 
 			var elementId = '#subcategory_' + level;
-			var divId = '#subcategoryDiv_' + level;
 
 			if(data.html != ''){
 				$(elementId).html(data.html);
-				$(divId).show();
+				$(elementId).show();
 			}
 
 			for(var i = level + 1; i < maxLevel; i++){
 				elementId = '#subcategory_' + i;
-				divId = '#subcategoryDiv_' + i;
-				$(divId).hide();
+				$(elementId).hide();
 				$(elementId).html('');
 			}
 
@@ -209,7 +227,7 @@ class Category extends CActiveRecord
 	{
 		//Loop up though categories, starting at the "sub-est (deepest)" until a valid value is found.
 		//In some cases, a subcategory may not be populated, or may have not been set, so check the one above it.
-		$category = 1;
+		$category = Category::NO_CATEGORY;
 		for($i = count($subcategories) - 1; $i >= 0; $i--){
 			if(isset($subcategories[$i]) && is_numeric($subcategories[$i])){
 				$category = $subcategories[$i];

@@ -55,7 +55,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 			'buttons'=>array(
 				'delete'=>array(
 					'visible'=>function($row, $data) {
-						return $data->id > 1;
+						return $data->id != Category::NO_CATEGORY;
 					},
 				),
 			),

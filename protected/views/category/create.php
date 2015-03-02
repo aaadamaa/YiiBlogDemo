@@ -24,7 +24,7 @@ Parent Category:<br >
 <?php echo Category::mainCategoryDropdown(); ?>
 <br />
 <?php for($i=0; $i<$maxLevel; $i++): ?>
-	<div id="subcategoryDiv_<?= $i ?>" style='display:none;'>
+	<div id="subcategoryDiv_<?= $i ?>">
 		<?php echo Category::subcategoryDropdown("subcategory[$i]", "subcategory_$i"); ?>
 	</div>
 <?php endfor; ?>

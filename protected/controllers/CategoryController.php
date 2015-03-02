@@ -75,11 +75,11 @@ class CategoryController extends Controller
 				if(isset($_POST['category']) && is_numeric($_POST['category'])){
 					$category = $_POST['category'];
 				}else{
-					$category = 1;
+					$category = Category::NO_CATEGORY;
 				}
 			}
 
-			if($category == 1){
+			if($category == Category::NO_CATEGORY){
 				$level = 0;
 				$parent = 0;
 			}else{
@@ -199,7 +199,7 @@ class CategoryController extends Controller
 
 	public function actionLoadSubcategories()
 	{
-		if($_POST['parent'] == 1){
+		if($_POST['parent'] == Category::NO_CATEGORY){
 			//Uncategorized
 			die(json_encode(array(
 				'html'=>'',
