@@ -216,7 +216,7 @@ class CategoryController extends Controller
 
 		$html = "";
 
-		$model = $this->loadModel((int) $_POST['parent']);
+		$model = Category::model()->findByPk((int) $_POST['parent']);
 
 		$children = $model->getChildren();
 		$level = $model->level;
